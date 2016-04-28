@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.metaboy.athena.dao.UserMapper">
+    <resultMap id="BaseResultMap" type="com.metaboy.athena.model.User" autoMapping="true"/>
+
+    <sql id="Base_Column_List">
+        id,
+        userName,
+        passwd,
+        email,
+        status,
+        gmtCreate,
+        gmtModified
+    </sql>
+
+    <insert id="addUserModel" parameterType="com.metaboy.athena.model.User">
+        <![CDATA[
+    insert into athena_user (
+            userName,
+            passwd,
+            email,
+            status,
+            gmtCreate)
+    values (
+            #{userName},
+            #{passwd},
+            #{email},
+            #{status},
+            now())
+            ]]>
+        <selectKey resultType="Long" keyProperty="id" order="AFTER">
+            <![CDATA[SELECT LAST_INSERT_ID() AS id ]]>
+        </selectKey>
+    </insert>
+
+</mapper>
