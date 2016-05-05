@@ -21,9 +21,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Integer removeUser(Long userId) {
+        return userMapper.removeUserModel(userId);
+    }
+
+    public Integer modifyUserInfo(User user) {
+        return userMapper.modifyUserInfo(user);
+    }
+
+    //todo project 相关接口
+    @Override
     public Long addUser2Project(User user, Long projectId, Integer role) {
         return 1L;
     }
 
 
+    @Override
+    public Integer removeUserInProject(Long userId, Long projectId) {
+        return 1;
+    }
+
+    @Override
+    public Integer modifyUserRoleInProject(Long userId, Long projectId, Integer newRole) {
+        return 1;
+    }
 }

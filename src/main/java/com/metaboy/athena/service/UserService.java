@@ -7,15 +7,54 @@ import com.metaboy.athena.model.User;
  */
 public interface UserService {
 
-    /*
-    用户注册
+    /**
+     * 用户注册
+     *
+     * @param user
+     * @return
      */
     Long addUser(User user);
 
-    /*
-    添加用户到project中
+    /**
+     * 更新用户信息
+     *
+     * @param user
+     * @return
+     */
+    Integer modifyUserInfo(User user);
+
+    /**
+     * 移除用户
+     *
+     * @param userId
+     * @return
+     */
+    Integer removeUser(Long userId);
+
+    /**
+     * 添加用户到project中
+     *
+     * @param user
+     * @param projectId
+     * @param role
+     * @return
      */
     Long addUser2Project(User user, Long projectId, Integer role);
 
+
+    /**
+     * @param userId
+     * @param projectId
+     * @return
+     */
+    Integer removeUserInProject(Long userId, Long projectId);
+
+    /**
+     * @param userId
+     * @param projectId
+     * @param newRole
+     * @return
+     */
+    Integer modifyUserRoleInProject(Long userId, Long projectId, Integer newRole);
 
 }
