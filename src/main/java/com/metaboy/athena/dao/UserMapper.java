@@ -10,9 +10,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserMapper {
 
-    Long addUserModel(User user);
+    Integer addUserModel(User user);
 
     Integer removeUserModel(Long userId);
+
+    Integer deleteUser(Long userId);
 
     Integer modifyUserInfo(User user);
 

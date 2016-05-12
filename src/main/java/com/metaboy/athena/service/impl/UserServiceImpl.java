@@ -3,6 +3,9 @@ package com.metaboy.athena.service.impl;
 import com.metaboy.athena.dao.UserMapper;
 import com.metaboy.athena.model.User;
 import com.metaboy.athena.service.UserService;
+import com.metaboy.athena.utils.DecryptionUtil;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,12 +15,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
 
+    private static Log logger = LogFactory.getLog(UserServiceImpl.class);
+
     @Autowired
     UserMapper userMapper;
 
     @Override
     public Long addUser(User user) {
-        return userMapper.addUserModel(user);
+        user.setPasswd(DecryptionUtil.encrypt(user.getPasswd()));
+        int ret = userMapper.addUserModel(user);
+        if (ret > 0) {
+            return user.getId();
+        } else {
+            return -1L;
+        }
     }
 
     @Override
@@ -25,8 +36,29 @@ public class UserServiceImpl implements UserService {
         return userMapper.removeUserModel(userId);
     }
 
+    @Override
+    public Integer deleteUser(Long userId) {
+        return userMapper.deleteUser(userId);
+    }
+
+    @Override
     public Integer modifyUserInfo(User user) {
         return userMapper.modifyUserInfo(user);
+    }
+
+    @Override
+    public User getUserByUser(String userName) {
+        User user = new User();
+        user.setUserName(userName);
+        return userMapper.getUser(user);
+    }
+
+
+    @Override
+    public User getUserByEmail(String email) {
+        User user = new User();
+        user.setEmail(email);
+        return userMapper.getUser(user);
     }
 
     //todo project 相关接口

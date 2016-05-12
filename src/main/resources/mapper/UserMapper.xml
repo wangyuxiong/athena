@@ -55,7 +55,7 @@
         passwd = #{passwd},
         email = #{email},
         status = #{status},
-        gmtModified = #{gmtModified}
+        gmtModified = now()
         where id = #{id}
     </update>
 
@@ -63,8 +63,13 @@
         update athena_user
         set
         status = -1,
-        gmtModified = #{gmtModified}
+        gmtModified = now()
         where id = #{id}
     </update>
+
+    <delete id="deleteUser">
+        DELETE FROM athena_user
+        WHERE id = #{id}
+    </delete>
 
 </mapper>

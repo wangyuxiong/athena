@@ -32,6 +32,31 @@ public interface UserService {
     Integer removeUser(Long userId);
 
     /**
+     * 删除用户的所有信息
+     * @param userId
+     * @return
+     */
+    Integer deleteUser(Long userId);
+
+    /**
+     * 通过用户名获取用户
+     *
+     * @param userName
+     * @return
+     */
+    User getUserByUser(String userName);
+
+
+    /**
+     * 通过 email 获取用户
+     *
+     * @param email
+     * @return
+     */
+    User getUserByEmail(String email);
+
+
+    /**
      * 添加用户到project中
      *
      * @param user
