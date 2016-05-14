@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.metaboy.athena.dao.UserMapper">
+    <resultMap id="BaseResultMap" type="com.metaboy.athena.model.Project" autoMapping="true"/>
+
+    <sql id="Base_Column_List">
+        id,
+        projectName,
+        projectDesc,
+        projectType,
+        status,
+        projectStage,
+        productId,
+        projectStartDate,
+        projectEndDate,
+        projectActualEndDate,
+        gmtCreate,
+        gmtModified
+    </sql>
+
+    <sql id="searchConditions">
+        <where>
+            <if test="project.id != null">AND id = #{project.id}</if>
+            <if test="project.productId != null">AND id = #{project.productId}</if>
+            <if test="project.projectName != null">AND userName = #{project.projectName}</if>
+            <if test="project.projectType != null">AND email = #{project.projectType}</if>
+            <if test="project.status != null">AND status = #{project.status}</if>
+        </where>
+    </sql>
+
+    <select id="listProjects" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from athena_project
+        <include refid="searchConditions"/>
+    </select>
+
+    <select id="getProjectById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from athena_project
+        where id = #{id}
+    </select>
+
+    <insert id="addProject" parameterType="com.metaboy.athena.model.Project">
+        <![CDATA[
+    insert into athena_project (
+        projectName,
+        projectDesc,
+        projectType,
+        status,
+        projectStage,
+        productId,
+        projectStartDate,
+        projectEndDate,
+        projectActualEndDate,
+        gmtCreate)
+    values (
+            #{projectName},
+            #{projectDesc},
+            #{projectType},
+            0,
+            #{projectStage},
+            #{productId},
+            #{projectStartDate},
+            #{projectEndDate},
+            #{projectActualEndDate},
+            now())
+            ]]>
+        <selectKey resultType="Long" keyProperty="id" order="AFTER">
+            <![CDATA[SELECT LAST_INSERT_ID() AS id ]]>
+        </selectKey>
+    </insert>
+
+    <update id="modifyProject" parameterType="com.metaboy.athena.model.Project">
+        update athena_project
+        set projectName = #{projectName},
+        projectDesc = #{projectDesc},
+        projectType = #{projectType},
+        status = #{status},
+        projectStage = #{projectStage},
+        projectEndDate = #{projectEndDate},
+        projectActualEndDate = #{projectActualEndDate},
+        gmtModified = now()
+        where id = #{id}
+    </update>
+
+    <update id="removeProject" parameterType="com.metaboy.athena.model.Project">
+        update athena_project
+        set
+        status = -1,
+        gmtModified = now()
+        where id = #{id}
+    </update>
+
+    <delete id="deleteProject">
+        DELETE FROM athena_project
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

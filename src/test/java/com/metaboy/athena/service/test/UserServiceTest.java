@@ -33,12 +33,15 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testUserAdd() throws Exception {
+    public void testUserService() throws Exception {
         System.out.println("start to test .......");
         User user = new User();
         String userName = "metaboy_test";
         String passwd = "test";
         String email = "yxiong.wang@gmail.com";
+
+        String newEmail = "234123806@qq.com";
+        String newPasswd = "test123";
 
         user.setUserName(userName);
         user.setPasswd(passwd);
@@ -61,7 +64,18 @@ public class UserServiceTest {
                 , userGetFormName.getEmail(), userGetFormName.getStatus()));
         System.out.println("get user test finished...");
 
-        Integer ret = userService.removeUser(userId);
+        userGetFormName.setEmail(newEmail);
+        userGetFormName.setPasswd(newPasswd);
+
+        Integer ret = userService.modifyUserInfo(userGetFormName);
+        assertTrue(ret == 1);
+
+        userGetFormName = userService.getUserByUser(userName);
+        System.out.println(String.format("........... userName: %s, passwd : %s, email: %s, status: %s", userGetFormName.getUserName(), userGetFormName.getPasswd()
+                , userGetFormName.getEmail(), userGetFormName.getStatus()));
+        System.out.println("modify user test finished...");
+
+        ret = userService.removeUser(userId);
 
         assertTrue(ret == 1);
 

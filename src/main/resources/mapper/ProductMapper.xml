@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.metaboy.athena.dao.UserMapper">
+    <resultMap id="BaseResultMap" type="com.metaboy.athena.model.Product" autoMapping="true"/>
+
+    <sql id="Base_Column_List">
+        id,
+        productName,
+        productDesc,
+        productType,
+        status,
+        gmtCreate,
+        gmtModified
+    </sql>
+
+    <sql id="searchConditions">
+        <where>
+            <if test="product.id != null">AND id = #{product.id}</if>
+            <if test="product.productName != null">AND userName = #{product.productName}</if>
+            <if test="product.productType != null">AND email = #{product.productType}</if>
+            <if test="product.status != null">AND status = #{product.status}</if>
+        </where>
+    </sql>
+
+    <select id="listProducts" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from athena_product
+        <include refid="searchConditions"/>
+    </select>
+
+    <select id="getProductById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from athena_product
+        where id = #{id}
+    </select>
+
+    <insert id="addProduct" parameterType="com.metaboy.athena.model.Product">
+        <![CDATA[
+    insert into athena_product (
+            productName,
+            productDesc,
+            productType,
+            status,
+            gmtCreate)
+    values (
+            #{productName},
+            #{productDesc},
+            #{productType},
+            0,
+            now())
+            ]]>
+        <selectKey resultType="Long" keyProperty="id" order="AFTER">
+            <![CDATA[SELECT LAST_INSERT_ID() AS id ]]>
+        </selectKey>
+    </insert>
+
+    <update id="modifyProduct" parameterType="com.metaboy.athena.model.Product">
+        update athena_product
+        set productName = #{productName},
+        productDesc = #{productDesc},
+        productType = #{productType},
+        status = #{status},
+        gmtModified = now()
+        where id = #{id}
+    </update>
+
+    <update id="removeProduct" parameterType="com.metaboy.athena.model.Product">
+        update athena_product
+        set
+        status = -1,
+        gmtModified = now()
+        where id = #{id}
+    </update>
+
+    <delete id="deleteProduct">
+        DELETE FROM athena_product
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

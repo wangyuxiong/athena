@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.metaboy.athena.dao.ProductRoleMapper">
+    <resultMap id="BaseResultMap" type="com.metaboy.athena.model.ProductRole" autoMapping="true"/>
+
+    <sql id="Base_Column_List">
+        productId,
+        userId,
+        role,
+        gmtCreate,
+        gmtModified
+    </sql>
+
+    <select id="getProductRolesByProId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from athena_product_role
+        where productId = #{productId}
+    </select>
+
+    <insert id="addProductRole" parameterType="com.metaboy.athena.model.ProductRole">
+        <![CDATA[
+    insert into athena_product_role (
+            productId,
+            userId,
+            role,
+            gmtCreate)
+    values (
+            #{productId},
+            #{userId},
+            #{role},
+            now())
+            ]]>
+    </insert>
+
+    <update id="modifyProductRole" parameterType="com.metaboy.athena.model.ProductRole">
+        update athena_product_role
+        set role = #{role},
+        gmtModified = now()
+        where productId = #{productId}
+        AND userId = #{userId}
+    </update>
+
+    <delete id="deleteProductRole">
+        DELETE FROM athena_product_role
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

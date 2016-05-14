@@ -43,6 +43,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Integer modifyUserInfo(User user) {
+        user.setPasswd(DecryptionUtil.encrypt(user.getPasswd()));
         return userMapper.modifyUserInfo(user);
     }
 
