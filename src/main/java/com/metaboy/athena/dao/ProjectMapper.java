@@ -21,5 +21,9 @@ public interface ProjectMapper {
 
     Project getProjectById(Long projectId);
 
-    List<Project> listProjects(@Param("project") Project project);
+    List<Project> listProjects(@Param("project") Project projectSearch);
+
+    List<Project> projectPage(@Param("project") Project projectSearch, @Param("offset") int offset, @Param("pageSize") int pageSize);
+
+    int countSearchProject(@Param("jobInfo") Project projectSearch);
 }

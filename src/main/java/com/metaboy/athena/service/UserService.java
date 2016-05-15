@@ -56,30 +56,5 @@ public interface UserService {
     User getUserByEmail(String email);
 
 
-    /**
-     * 添加用户到project中
-     *
-     * @param user
-     * @param projectId
-     * @param role
-     * @return
-     */
-    Long addUser2Project(User user, Long projectId, Integer role);
-
-
-    /**
-     * @param userId
-     * @param projectId
-     * @return
-     */
-    Integer removeUserInProject(Long userId, Long projectId);
-
-    /**
-     * @param userId
-     * @param projectId
-     * @param newRole
-     * @return
-     */
-    Integer modifyUserRoleInProject(Long userId, Long projectId, Integer newRole);
 
 }

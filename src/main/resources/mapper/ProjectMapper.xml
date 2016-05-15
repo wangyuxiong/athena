@@ -98,4 +98,23 @@
         WHERE id = #{id}
     </delete>
 
+    <select id="countSearchProject" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM athena_project
+        <where>
+            <include refid="searchConditions"/>
+        </where>
+    </select>
+
+    <select id="projectPage" resultMap="com.metaboy.athena.model.Project">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM athena_project
+        <where>
+            <include refid="searchConditions"/>
+        </where>
+        ORDER BY id DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
 </mapper>
