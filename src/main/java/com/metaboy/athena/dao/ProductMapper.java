@@ -13,13 +13,15 @@ public interface ProductMapper {
 
     Integer addProduct(Product product);
 
-    Integer removeProduct(Long productId);
-
     Integer deleteProduct(Long userId);
 
     Integer modifyProduct(Product product);
 
     Product getProductById(Long productId);
 
-    List<Product> listProducts(@Param("product") Product product);
+    List<Product> listProducts(@Param("product") Product productSearch);
+
+    List<Product> productPage(@Param("project") Product productSearch, @Param("offset") int offset, @Param("pageSize") int pageSize);
+
+    int countSearchProduct(@Param("jobInfo") Product productSearch);
 }
