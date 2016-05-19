@@ -41,6 +41,24 @@ public class ProjectServiceImpl implements ProjectService {
 
 
     @Override
+    public int deleteProject(Long projectId) {
+        return projectMapper.deleteProject(projectId);
+    }
+
+    public int deleteProjectByName(String projectName) {
+        return projectMapper.deleteProjectByName(projectName);
+    }
+
+    @Override
+    public int removeProject(Long projectId) {
+        return projectMapper.removeProject(projectId);
+    }
+
+    public int modifyProjectInfo(Project project) {
+        return projectMapper.modifyProject(project);
+    }
+
+    @Override
     public Page<Project> listProject(Project search, int curPage, int pageSize) {
         Page<Project> page = new Page<Project>();
         page.setCurPage(curPage);
@@ -57,7 +75,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Integer addUser2Project(Long userId, Long projectId, Integer role) {
+    public int addUser2Project(Long userId, Long projectId, Integer role) {
         ProjectRole projectRole = new ProjectRole();
         projectRole.setProjectId(projectId);
         projectRole.setUserId(userId);
@@ -68,18 +86,30 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Integer removeUserInProject(Long userId, Long projectId) {
+    public int removeUserInProject(Long userId, Long projectId) {
         ProjectRole projectRole = new ProjectRole();
         projectRole.setUserId(userId);
         projectRole.setProjectId(projectId);
         return projectRoleMapper.deleteProjectRole(projectRole);
     }
 
-    public Integer modifyUserRoleInProject(Long userId, Long projectId, Integer newRole) {
+    @Override
+    public int modifyUserRoleInProject(Long userId, Long projectId, Integer newRole) {
         ProjectRole projectRole = new ProjectRole();
         projectRole.setUserId(userId);
         projectRole.setProjectId(projectId);
         projectRole.setRole(newRole);
         return projectRoleMapper.modifyProjectRole(projectRole);
     }
+
+    @Override
+    public int getUserRoleInProject(Long userId, Long projectId) {
+        return projectRoleMapper.getUserRoleInProject(userId, projectId);
+    }
+
+    @Override
+    public List<ProjectRole> listUserInProject(Long projectId) {
+        return projectRoleMapper.getProjectRolesByProId(projectId);
+    }
+
 }

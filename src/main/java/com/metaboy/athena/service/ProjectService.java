@@ -2,6 +2,7 @@ package com.metaboy.athena.service;
 
 import com.metaboy.athena.model.Page;
 import com.metaboy.athena.model.Project;
+import com.metaboy.athena.model.ProjectRole;
 
 import java.util.List;
 
@@ -14,11 +15,23 @@ public interface ProjectService {
 
     Project getProjectById(Long projectId);
 
+    int modifyProjectInfo(Project project);
+
+    int deleteProject(Long projectId);
+
+    int deleteProjectByName(String projectName);
+
+    int removeProject(Long projectId);
+
     Page<Project> listProject(Project search, int curPage, int pageSize);
 
-    Integer addUser2Project(Long userId, Long projectId, Integer role);
+    int addUser2Project(Long userId, Long projectId, Integer role);
 
-    Integer removeUserInProject(Long userId, Long projectId);
+    int removeUserInProject(Long userId, Long projectId);
 
-    Integer modifyUserRoleInProject(Long userId, Long projectId, Integer newRole);
+    int modifyUserRoleInProject(Long userId, Long projectId, Integer newRole);
+
+    int getUserRoleInProject(Long userId, Long projectId);
+
+    List<ProjectRole> listUserInProject(Long projectId);
 }

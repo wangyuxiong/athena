@@ -1,4 +1,4 @@
-package com.metaboy.athena.service.test;
+package com.metaboy.athena.service;
 
 import com.metaboy.athena.service.ProductService;
 import org.junit.runner.RunWith;

@@ -18,6 +18,14 @@
         where projectId = #{projectId}
     </select>
 
+    <select id="getUserRoleInProject" resultType="java.lang.Integer">
+        select
+        role
+        from athena_project_role
+        where projectId = #{projectId}
+        and userId = #{userId}
+    </select>
+
     <insert id="addProjectRole" parameterType="com.metaboy.athena.model.ProjectRole">
         <![CDATA[
     insert into athena_project_role (
@@ -43,7 +51,8 @@
 
     <delete id="deleteProjectRole">
         DELETE FROM athena_project_role
-        WHERE id = #{id}
+        WHERE projectId = #{projectId}
+        AND userId = #{userId}
     </delete>
 
 </mapper>

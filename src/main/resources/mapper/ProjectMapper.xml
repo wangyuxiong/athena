@@ -21,19 +21,19 @@
     <sql id="searchConditions">
         <where>
             <if test="project.id != null">AND id = #{project.id}</if>
-            <if test="project.productId != null">AND id = #{project.productId}</if>
-            <if test="project.projectName != null">AND userName = #{project.projectName}</if>
-            <if test="project.projectType != null">AND email = #{project.projectType}</if>
+            <if test="project.productId != null">AND productId = #{project.productId}</if>
+            <if test="project.projectName != null">AND projectName = #{project.projectName}</if>
+            <if test="project.projectType != null">AND projectType = #{project.projectType}</if>
             <if test="project.status != null">AND status = #{project.status}</if>
         </where>
     </sql>
 
-    <select id="listProjects" resultMap="projectResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from athena_project
-        <include refid="searchConditions"/>
-    </select>
+    <!--<select id="listProject" resultMap="projectResultMap">-->
+    <!--select-->
+    <!--<include refid="Base_Column_List"/>-->
+    <!--from athena_project-->
+    <!--<include refid="searchConditions"/>-->
+    <!--</select>-->
 
     <select id="getProjectById" resultMap="projectResultMap">
         select
@@ -98,21 +98,22 @@
         WHERE id = #{id}
     </delete>
 
+    <delete id="deleteProjectByName">
+        DELETE FROM athena_project
+        WHERE projectName = #{projectName}
+    </delete>
+
     <select id="countSearchProject" resultType="java.lang.Integer">
         SELECT COUNT(*)
         FROM athena_project
-        <where>
-            <include refid="searchConditions"/>
-        </where>
+        <include refid="searchConditions"/>
     </select>
 
     <select id="projectPage" resultMap="projectResultMap">
         SELECT
         <include refid="Base_Column_List"/>
         FROM athena_project
-        <where>
-            <include refid="searchConditions"/>
-        </where>
+        <include refid="searchConditions"/>
         ORDER BY id DESC
         LIMIT #{offset}, #{pageSize}
     </select>

@@ -21,7 +21,7 @@ public interface ProductMapper {
 
     List<Product> listProducts(@Param("product") Product productSearch);
 
-    List<Product> productPage(@Param("project") Product productSearch, @Param("offset") int offset, @Param("pageSize") int pageSize);
+    List<Product> productPage(@Param("product") Product productSearch, @Param("offset") int offset, @Param("pageSize") int pageSize);
 
-    int countSearchProduct(@Param("jobInfo") Product productSearch);
+    int countSearchProduct(@Param("product") Product productSearch);
 }

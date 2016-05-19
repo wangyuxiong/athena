@@ -15,15 +15,17 @@ public interface ProjectMapper {
 
     Integer removeProject(Long projectId);
 
-    Integer deleteProject(Long userId);
+    Integer deleteProject(Long projectId);
+
+    Integer deleteProjectByName(@Param("projectName") String projectName);
 
     Integer modifyProject(Project project);
 
     Project getProjectById(Long projectId);
 
-    List<Project> listProjects(@Param("project") Project projectSearch);
+//    List<Project> listProject(@Param("project") Project projectSearch);
 
     List<Project> projectPage(@Param("project") Project projectSearch, @Param("offset") int offset, @Param("pageSize") int pageSize);
 
-    int countSearchProject(@Param("jobInfo") Project projectSearch);
+    int countSearchProject(@Param("project") Project projectSearch);
 }
