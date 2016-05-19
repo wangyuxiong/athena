@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.metaboy.athena.dao.UserMapper">
-    <resultMap id="BaseResultMap" type="com.metaboy.athena.model.Product" autoMapping="true"/>
+<mapper namespace="com.metaboy.athena.dao.ProductMapper">
+    <resultMap id="productResultMap" type="com.metaboy.athena.model.Product" autoMapping="true"/>
 
     <sql id="Base_Column_List">
         id,
@@ -22,14 +22,14 @@
         </where>
     </sql>
 
-    <select id="listProducts" resultMap="BaseResultMap">
+    <select id="listProducts" resultMap="productResultMap">
         select
         <include refid="Base_Column_List"/>
         from athena_product
         <include refid="searchConditions"/>
     </select>
 
-    <select id="getProductById" resultMap="BaseResultMap">
+    <select id="getProductById" resultMap="productResultMap">
         select
         <include refid="Base_Column_List"/>
         from athena_product
@@ -87,7 +87,7 @@
         </where>
     </select>
 
-    <select id="productPage" resultMap="com.metaboy.athena.model.Product">
+    <select id="productPage" resultMap="productResultMap">
         SELECT
         <include refid="Base_Column_List"/>
         FROM athena_product

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.metaboy.athena.dao.ProjectRoleMapper">
-    <resultMap id="BaseResultMap" type="com.metaboy.athena.model.ProjectRole" autoMapping="true"/>
+    <resultMap id="projectRoleResultMap" type="com.metaboy.athena.model.ProjectRole" autoMapping="true"/>
 
     <sql id="Base_Column_List">
         projectId,
@@ -11,7 +11,7 @@
         gmtModified
     </sql>
 
-    <select id="getProjectRolesByProId" resultMap="BaseResultMap">
+    <select id="getProjectRolesByProId" resultMap="projectRoleResultMap">
         select
         <include refid="Base_Column_List"/>
         from athena_project_role

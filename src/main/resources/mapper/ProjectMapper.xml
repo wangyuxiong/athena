@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.metaboy.athena.dao.UserMapper">
-    <resultMap id="BaseResultMap" type="com.metaboy.athena.model.Project" autoMapping="true"/>
+<mapper namespace="com.metaboy.athena.dao.ProjectMapper">
+    <resultMap id="projectResultMap" type="com.metaboy.athena.model.Project" autoMapping="true"/>
 
     <sql id="Base_Column_List">
         id,
@@ -28,14 +28,14 @@
         </where>
     </sql>
 
-    <select id="listProjects" resultMap="BaseResultMap">
+    <select id="listProjects" resultMap="projectResultMap">
         select
         <include refid="Base_Column_List"/>
         from athena_project
         <include refid="searchConditions"/>
     </select>
 
-    <select id="getProjectById" resultMap="BaseResultMap">
+    <select id="getProjectById" resultMap="projectResultMap">
         select
         <include refid="Base_Column_List"/>
         from athena_project
@@ -106,7 +106,7 @@
         </where>
     </select>
 
-    <select id="projectPage" resultMap="com.metaboy.athena.model.Project">
+    <select id="projectPage" resultMap="projectResultMap">
         SELECT
         <include refid="Base_Column_List"/>
         FROM athena_project

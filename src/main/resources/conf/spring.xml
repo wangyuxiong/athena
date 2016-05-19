@@ -19,6 +19,8 @@
 
     <import resource="classpath:conf/spring-mybatis.xml"/>
 
+    <bean id="beanFactoryHelper" class="com.metaboy.athena.utils.BeanFactoryHelper"/>
+
     <bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
         <property name="velocityProperties">
             <props>
