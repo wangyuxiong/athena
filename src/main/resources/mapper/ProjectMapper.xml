@@ -85,7 +85,7 @@
         where id = #{id}
     </update>
 
-    <update id="removeProject" parameterType="com.metaboy.athena.model.Project">
+    <update id="removeProject">
         update athena_project
         set
         status = -1,

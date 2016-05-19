@@ -1,6 +1,7 @@
 package com.metaboy.athena.dao;
 
 import com.metaboy.athena.model.ProductRole;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,5 +17,8 @@ public interface ProductRoleMapper {
 
     Integer modifyProductRole(ProductRole productRole);
 
-    List<ProductRole> getProductRolesByProId(Long productId);
+    List<ProductRole> getProductRolesByProId(@Param(value = "productId") Long productId);
+
+    Integer getUserRoleInProduct(@Param(value = "userId") Long userId,
+                                 @Param(value = "productId") Long productId);
 }

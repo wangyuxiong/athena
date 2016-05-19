@@ -18,6 +18,14 @@
         where productId = #{productId}
     </select>
 
+    <select id="getUserRoleInProduct" resultType="java.lang.Integer">
+        select
+        role
+        from athena_product_role
+        where productId = #{productId}
+        and userId = #{userId}
+    </select>
+
     <insert id="addProductRole" parameterType="com.metaboy.athena.model.ProductRole">
         <![CDATA[
     insert into athena_product_role (
@@ -43,7 +51,8 @@
 
     <delete id="deleteProductRole">
         DELETE FROM athena_product_role
-        WHERE id = #{id}
+        WHERE productId = #{productId}
+        AND userId = #{userId}
     </delete>
 
 </mapper>

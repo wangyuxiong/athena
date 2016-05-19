@@ -16,8 +16,8 @@
     <sql id="searchConditions">
         <where>
             <if test="product.id != null">AND id = #{product.id}</if>
-            <if test="product.productName != null">AND userName = #{product.productName}</if>
-            <if test="product.productType != null">AND email = #{product.productType}</if>
+            <if test="product.productName != null">AND productName = #{product.productName}</if>
+            <if test="product.productType != null">AND productType = #{product.productType}</if>
             <if test="product.status != null">AND status = #{product.status}</if>
         </where>
     </sql>
@@ -66,7 +66,7 @@
         where id = #{id}
     </update>
 
-    <update id="removeProduct" parameterType="com.metaboy.athena.model.Product">
+    <update id="removeProduct">
         update athena_product
         set
         status = -1,
@@ -79,21 +79,22 @@
         WHERE id = #{id}
     </delete>
 
+    <delete id="deleteProductByName">
+        DELETE FROM athena_product
+        WHERE productName = #{productName}
+    </delete>
+
     <select id="countSearchProduct" resultType="java.lang.Integer">
         SELECT COUNT(*)
         FROM athena_product
-        <where>
-            <include refid="searchConditions"/>
-        </where>
+        <include refid="searchConditions"/>
     </select>
 
     <select id="productPage" resultMap="productResultMap">
         SELECT
         <include refid="Base_Column_List"/>
         FROM athena_product
-        <where>
-            <include refid="searchConditions"/>
-        </where>
+        <include refid="searchConditions"/>
         ORDER BY id DESC
         LIMIT #{offset}, #{pageSize}
     </select>

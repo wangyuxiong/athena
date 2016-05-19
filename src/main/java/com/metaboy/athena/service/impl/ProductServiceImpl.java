@@ -7,6 +7,7 @@ import com.metaboy.athena.model.Product;
 import com.metaboy.athena.model.ProductRole;
 import com.metaboy.athena.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.xml.ws.WebFault;
 import java.util.Collections;
@@ -15,6 +16,7 @@ import java.util.List;
 /**
  * Created by metaboy on 16/5/17.
  */
+@Service
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
@@ -31,6 +33,25 @@ public class ProductServiceImpl implements ProductService {
         } else {
             return -1L;
         }
+    }
+
+    @Override
+    public int modifyProductInfo(Product product) {
+        return productMapper.modifyProduct(product);
+    }
+
+    public int deleteProduct(Long productId) {
+        return productMapper.deleteProduct(productId);
+    }
+
+    @Override
+    public int deleteProductByName(String productName) {
+        return productMapper.deleteProductByName(productName);
+    }
+
+    @Override
+    public int removeProduct(Long productId) {
+        return productMapper.removeProduct(productId);
     }
 
     @Override
@@ -81,5 +102,15 @@ public class ProductServiceImpl implements ProductService {
         productRole.setRole(newRole);
 
         return productRoleMapper.modifyProductRole(productRole);
+    }
+
+    @Override
+    public int getUserRoleInProduct(Long userId, Long productId) {
+        return productRoleMapper.getUserRoleInProduct(userId, productId);
+    }
+
+    @Override
+    public List<ProductRole> listUserInProduct(Long productId) {
+        return productRoleMapper.getProductRolesByProId(productId);
     }
 }
