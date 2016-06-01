@@ -17,9 +17,6 @@ public class UserServiceImpl implements UserService {
 
     private static Log logger = LogFactory.getLog(UserServiceImpl.class);
 
-    /**
-     *
-     */
     @Autowired
     UserMapper userMapper;
 
