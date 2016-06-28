@@ -50,8 +50,8 @@ public class UserController {
 
 
     @RequestMapping(value = "/user/{name:.*}", method = RequestMethod.PUT)
-    public RestResult userChecked(@PathVariable(value = "name") String name,
-                                  @RequestBody User user) {
+    public RestResult userUpdate(@PathVariable(value = "name") String name,
+                                 @RequestBody User user) {
 
         user.setUserName(name);
         user.setGmtModified(new Date());
@@ -67,7 +67,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/user/{name:.*}", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/{name:.*}", method = RequestMethod.POST)
     public RestResult userDetails(
             @PathVariable(value = "name") String name) {
 

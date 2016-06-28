@@ -9,6 +9,7 @@
         passwd,
         email,
         status,
+        isSuperUser,
         gmtCreate,
         gmtModified
     </sql>
@@ -36,11 +37,13 @@
             passwd,
             email,
             status,
+            isSuperUser,
             gmtCreate)
     values (
             #{userName},
             #{passwd},
             #{email},
+            0,
             0,
             now())
             ]]>

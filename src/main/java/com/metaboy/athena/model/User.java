@@ -16,9 +16,18 @@ public class User {
 
     private Integer status;
 
-    private Date gmtCreate;
 
+    private Integer isSuperUser;
+    private Date gmtCreate;
     private Date gmtModified;
+
+    public Integer getIsSuperUser() {
+        return isSuperUser;
+    }
+
+    public void setIsSuperUser(Integer isSuperUser) {
+        this.isSuperUser = isSuperUser;
+    }
 
     public Long getId() {
         return id;

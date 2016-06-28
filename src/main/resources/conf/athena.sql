@@ -5,6 +5,7 @@ CREATE TABLE `athena_user` (
   `passwd` varchar(100) NOT NULL,
   `email` varchar(50) NOT NULL,
   `status` int(11) NOT NULL,
+  `isSuperUser` int(11) NOT NULL,
   `gmtCreate` datetime DEFAULT NULL,
   `gmtModified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
